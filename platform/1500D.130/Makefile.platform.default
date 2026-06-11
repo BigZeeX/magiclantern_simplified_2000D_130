@@ -1,0 +1,27 @@
+# 1500D 1.3.0
+
+CANON_NAME_FIR      = CCF26130.FIR
+FIRMWARE_ID         = 0x80000432
+
+# Identitas Kamera
+MODEL = 1500D
+FW_VERSION = 130
+
+# Profil kompilasi awal (wajib minimal untuk tes nyawa)
+ML_SRC_PROFILE = minimal
+CFLAGS += -Wno-error
+
+# Konfigurasi Cache Hack (Sangat Krusial)
+ROMBASEADDR = 0xFE0C0000
+RESTARTSTART = 0xC80000
+ML_BOOT_OBJ = boot-d45-ch.o
+
+# 32MB ROM, like 1300D
+ROMBASEADDR         = 0xFE0C0000
+PLATFORM_ARCH = armv5te
+# Load ML at the end of the AllocateMemory pool
+# Default 0x2D0000 - 0xD00000, patched to 0x2D0000 - 0xC80000 (512K for us).
+RESTARTSTART        = 0xC80000
+ML_BOOT_OBJ         = boot-d45-ch.o
+ML_SRC_EXTRA_OBJS += function_overrides.o
+
